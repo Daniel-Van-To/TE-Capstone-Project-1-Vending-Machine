@@ -62,7 +62,7 @@ process menu:
     4. After completing their purchase, the user returns to the "Main" menu to
     continue using the vending machine.
 8. The vending machine logs all transactions to prevent theft from the vending machine.
-   - Each purchase must generate a line in a file called `Log.txt`.
+   - Each purchase must generate a line in a file called `Vending.log`.
    - The lines must follow the format shown in the following example.
        - The first dollar amount is the amount deposited, spent, or given as change.
        - The second dollar amount is the new balance.
