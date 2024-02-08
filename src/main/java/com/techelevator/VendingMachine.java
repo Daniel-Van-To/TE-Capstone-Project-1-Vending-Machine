@@ -10,16 +10,19 @@ public class VendingMachine {
 //    private Map<String, List<StuffedAnimal>> vendingInventory;
     private Map<String, StuffedAnimal> vendingInventory;
     private boolean finishedTransaction;
+    private InternalRecord record;
+
+
     //constructor
     public VendingMachine() {
         userInput = new Scanner(System.in);
         vendingInventory = new HashMap<>();
         finishedTransaction = false;
+        record = new InternalRecord();
     }
+
+
     //method
-//    public String readFile(){
-//
-//    }
     public void run() {
         //TODO make readInputFile method
         readInputFile();
@@ -126,6 +129,7 @@ public class VendingMachine {
                     }
                     else {
                         userTransaction.feedMoney(addMoney);
+                        record.writeToRecord("FEED MONEY", addMoney, userTransaction.getBalance());
                     }
                 }
                 catch(Exception e) {
@@ -145,9 +149,12 @@ public class VendingMachine {
 
                             userTransaction.subtractBalance(selectedAnimal.getPrice());
                             selectedAnimal.dispense();
+
                             System.out.println("Name: " + selectedAnimal.getName() + ", Price: " + selectedAnimal.getPrice() );
                             System.out.println(selectedAnimal.makeSound());
                             System.out.println("Remaining Balance: " + userTransaction.getBalance());
+
+                            record.writeToRecord(selectedAnimal, userTransaction.getBalance());
 
                         }
                         else {
@@ -165,14 +172,15 @@ public class VendingMachine {
             }
             else if(choice == 3) {
 
+                record.writeToRecord("GIVE CHANGE", userTransaction.getBalance(), 0.00);
+
                 for(Map.Entry<String, Integer> entry: userTransaction.returnChange().entrySet()) {
                     System.out.println(entry.getKey() + ": " + entry.getValue());
                 }
+
                 stillPurchase = false;
             }
         }
-
-
         return true;
     }
     public String createSalesReport(){
