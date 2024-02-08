@@ -27,7 +27,7 @@ public abstract class StuffedAnimal {
     public int getQuantity() {
         return quantity;
     }
-    public void setQuantity() {
+    public void dispense() {
         quantity--;
     }
 
