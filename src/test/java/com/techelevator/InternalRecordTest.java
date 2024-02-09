@@ -11,6 +11,10 @@ public class InternalRecordTest {
 
 	@Test
 	public void testMethod1() {
-		//pass null into
+		//Arrange
+
+		//Act
+
+		//Assert expected & actual == booleans
 	}
 }

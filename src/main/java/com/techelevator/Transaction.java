@@ -20,12 +20,20 @@ public class Transaction {
     }
 
     public double feedMoney(double moneyToAdd) {
-        balance += moneyToAdd;
+
+        if(moneyToAdd > 0) {
+            balance += moneyToAdd;
+        }
+
         return balance;
     }
 
     public double subtractBalance(double moneyToSubtract) {
-        balance -= moneyToSubtract;
+
+        if(moneyToSubtract <= balance) {
+            balance -= moneyToSubtract;
+        }
+
         return balance;
     }
 

@@ -20,46 +20,51 @@ public class SalesReport {
     public SalesReport(){
         soldInventory = new HashMap<>();
         currentTime = LocalDateTime.now();
-        formattedCurrentTime = DateTimeFormatter.ofPattern("MM-dd-yyyy hh:mm:ss a");
+        formattedCurrentTime = DateTimeFormatter.ofPattern("MM-dd-yyyy hh-mm-ss a");
         salesTotal = 0;
     }
 
     //methods
-    public boolean saveToSalesReport( String itemName, double price) {
+    public Map<String, Integer> saveToSalesReport( String itemName, double price) {
         int count = 0;
-        if(soldInventory.containsKey(itemName)) {
-            count = soldInventory.get(itemName) + 1;
-            soldInventory.put(itemName, count);
-        } else {
-            soldInventory.put(itemName, 1);
+
+        if(itemName != null) {
+            if (soldInventory.containsKey(itemName)) {
+                count = soldInventory.get(itemName) + 1;
+                soldInventory.put(itemName, count);
+            } else {
+                soldInventory.put(itemName, 1);
+            }
+            salesTotal += price;
         }
-        salesTotal += price;
-        return true;
+
+        return soldInventory;
+
     }
 
 
     public boolean writeToSalesReport() {
         currentTime = LocalDateTime.now();
         String formattedTime = currentTime.format(formattedCurrentTime);
-        String fileName = "SALES REPORT - " + formattedTime;
+        System.out.println(formattedTime);
+        String fileName = "SALES REPORT - " + formattedTime + ".log";
         salesReport = new File(fileName);
 
-        if(!salesReport.exists()) {
-            try{
+            try {
                 salesReport.createNewFile();
-                return true;
-            } catch (IOException e) {
-                return false;
             }
-        }
+            catch(IOException e) {
+
+            }
+
 
         try(PrintWriter output = new PrintWriter(salesReport)) {
 
             for(Map.Entry<String, Integer> entry : soldInventory.entrySet()) {
                 output.println(entry.getKey() + ", " + entry.getValue());
             }
-            System.out.println();
-            System.out.println("TOTAL SALES " + salesTotal);
+            output.println();
+            output.println("TOTAL SALES " + salesTotal);
 
         } catch(IOException e){
             return false;
