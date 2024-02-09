@@ -11,6 +11,7 @@ public class VendingMachine {
     private Map<String, StuffedAnimal> vendingInventory;
     private boolean finishedTransaction;
     private InternalRecord record;
+    private SalesReport report;
 
 
     //constructor
@@ -19,6 +20,7 @@ public class VendingMachine {
         vendingInventory = new HashMap<>();
         finishedTransaction = false;
         record = new InternalRecord();
+        report = new SalesReport();
     }
 
 
@@ -51,7 +53,7 @@ public class VendingMachine {
                 finishedTransaction = true;
             } else if (selection == 4) {
                 //TODO make the createSalesReport method
-                createSalesReport();
+                report.writeToSalesReport();
             } else {
                 System.out.println("Invalid number!");
                 System.out.println();
@@ -155,6 +157,7 @@ public class VendingMachine {
                             System.out.println("Remaining Balance: " + userTransaction.getBalance());
 
                             record.writeToRecord(selectedAnimal, userTransaction.getBalance());
+                            report.saveToSalesReport(selectedAnimal.getName(), selectedAnimal.getPrice());
 
                         }
                         else {
@@ -183,8 +186,6 @@ public class VendingMachine {
         }
         return true;
     }
-    public String createSalesReport(){
-        return null;
-    }
+
 }
 

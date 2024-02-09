@@ -6,10 +6,11 @@ import org.junit.runners.MethodSorters;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class UnitTest1 {
+public class InternalRecordTest {
 
 
 	@Test
 	public void testMethod1() {
+		//pass null into
 	}
 }

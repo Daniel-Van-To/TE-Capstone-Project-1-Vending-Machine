@@ -32,12 +32,12 @@ public class InternalRecord {
         return true;
     }
 
-    public boolean writeToRecord(String action, double transactionMoney, double balance ) {
+    public boolean writeToRecord(String action, double balanceModifier, double balance ) {
         try(PrintWriter output = new PrintWriter(new FileOutputStream(destinationFile, true))) {
 
             currentTime = LocalDateTime.now();
             String formattedTime = currentTime.format(formattedCurrentTime);
-            output.println(formattedTime + " " + action + ": " + transactionMoney + " " + balance);
+            output.println(formattedTime + " " + action + ": " + balanceModifier + " " + balance);
 
         } catch(IOException e){
             return false;

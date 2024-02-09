@@ -19,18 +19,20 @@ public class Transaction {
         return balance;
     }
 
-    public void feedMoney(double moneyToAdd) {
+    public double feedMoney(double moneyToAdd) {
         balance += moneyToAdd;
+        return balance;
     }
 
-    public void subtractBalance(double moneyToSubtract) {
+    public double subtractBalance(double moneyToSubtract) {
         balance -= moneyToSubtract;
+        return balance;
     }
 
     public Map<String, Integer> returnChange() {
 
         int count = 0;
-        double remainder = 0;
+
         Map<String, Integer> change = new HashMap<>();
 
         if(balance >= QUARTER) {
