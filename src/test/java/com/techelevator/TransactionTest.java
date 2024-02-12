@@ -22,7 +22,7 @@ public class TransactionTest {
     @Test
     public void check_if_subtractBalance_returns_unchanged_balance_if_moneyToSubtract_is_more_than_balance() {
 
-        //Arrage
+        //Arrange
         Transaction checkSubtractBalance = new Transaction();
 
         //Act

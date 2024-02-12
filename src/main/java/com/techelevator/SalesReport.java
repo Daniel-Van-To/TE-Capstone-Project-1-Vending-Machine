@@ -46,7 +46,6 @@ public class SalesReport {
     public boolean writeToSalesReport() {
         currentTime = LocalDateTime.now();
         String formattedTime = currentTime.format(formattedCurrentTime);
-        System.out.println(formattedTime);
         String fileName = "SALES REPORT - " + formattedTime + ".log";
         salesReport = new File(fileName);
 
@@ -64,7 +63,8 @@ public class SalesReport {
                 output.println(entry.getKey() + ", " + entry.getValue());
             }
             output.println();
-            output.println("TOTAL SALES " + salesTotal);
+
+            output.printf("TOTAL SALES %.2f", salesTotal );
 
         } catch(IOException e){
             return false;

@@ -109,9 +109,11 @@ public class VendingMachine {
     public boolean displayItem(){
 
         for (Map.Entry<String, StuffedAnimal> entry : vendingInventory.entrySet()) {
-            System.out.println(entry.getKey() + " - " + entry.getValue().getName()
-                    + ": $" + entry.getValue().getPrice() + " Quantity remaining: "
-                    + (entry.getValue().getQuantity() == 0 ? "SOLD OUT" : entry.getValue().getQuantity()));
+
+            System.out.print(entry.getKey() + " - " + entry.getValue().getName() );
+            System.out.printf(": $ %.2f", entry.getValue().getPrice());
+            System.out.println(" Quantity remaining: " + (entry.getValue().getQuantity() == 0 ? "SOLD OUT" : entry.getValue().getQuantity()));
+
         }
 
         System.out.println();
@@ -126,7 +128,7 @@ public class VendingMachine {
         while(stillPurchase) {
 
             System.out.println();
-            System.out.println("Current money provided: " + userTransaction.getBalance());
+            System.out.printf("Current money provided: %.2f \n", userTransaction.getBalance());
             System.out.println();
 
             System.out.println("(1) Feed Money");
@@ -182,9 +184,10 @@ public class VendingMachine {
                                 userTransaction.subtractBalance(selectedAnimal.getPrice());
                                 selectedAnimal.dispense();
 
-                                System.out.println("Name: " + selectedAnimal.getName() + ", Price: " + selectedAnimal.getPrice());
+                                System.out.printf("Name: %s,  Price: %.2f \n", selectedAnimal.getName() , selectedAnimal.getPrice());
+
                                 System.out.println(selectedAnimal.makeSound());
-                                System.out.println("Remaining Balance: " + userTransaction.getBalance());
+                                System.out.printf("Remaining Balance: %.2f \n", userTransaction.getBalance());
 
                                 record.writeToRecord(selectedAnimal, userTransaction.getBalance());
                                 report.saveToSalesReport(selectedAnimal.getName(), selectedAnimal.getPrice());
